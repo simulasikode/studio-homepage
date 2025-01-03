@@ -1,39 +1,81 @@
-import Head from "next/head";
+// pages/index.tsx
+import { Box, Heading, Text, Mark } from "@chakra-ui/react";
+import { GetStaticProps } from "next";
+import { motion } from "framer-motion";
+import DrawerMenu from "@/components/drawerMenu";
 
-const UnderConstruction = () => {
+const currentYear = new Date().getFullYear();
+const ParalaxSection = motion(Box);
+const MainContent = () => (
+  <Box
+    position="relative" // Shift content when sidebar is open
+    px={{ base: "4", md: "16" }}
+    py={10}
+    w="full"
+    minH="100vh"
+    bg="dark.bg"
+    transition="margin-left 0.3s ease"
+    color="dark.color"
+    sx={{
+      backgroundImage: "radial-gradient(circle, black 20%, transparent 20%)",
+      backgroundSize: "20px 20px",
+      backgroundPosition: "0 0",
+      backgroundRepeat: "repeat",
+    }}
+  >
+    <ParalaxSection
+      initial={{ y: "30%", opacity: "0" }}
+      animate={{ y: "0", opacity: "1" }}
+      transition={{
+        opacity: { duration: 1.5, ease: "easeInOut" }, // opacity transition
+        y: { duration: 1, ease: "easeOut" },
+      }}
+      position="relative"
+    >
+      <Heading
+        as="h1"
+        fontSize={{ base: "5xl", md: "7xl" }}
+        fontWeight="extrabold"
+        mb={4}
+      >
+        Prepress
+      </Heading>
+      <Text fontSize={{ base: "2xl", md: "5xl" }} fontWeight="bold">
+        : the process of assembling and editing a product (such as a book or
+        newspaper) prior to printing. adjusted{" "}
+        <Mark bg="light.color" color="dark.color" borderRadius="md" p={2}>
+          the colors
+        </Mark>{" "}
+        in prepress. often used before another noun.
+      </Text>
+      <Text mt={8}> &copy; {currentYear}. Simulasi Studio</Text>
+    </ParalaxSection>
+  </Box>
+);
+
+const Home = () => {
   return (
-    <>
-      <Head>
-        <title>Simulasi Studio</title>
-        <meta
-          name="description"
-          content="Our website is under construction. Stay tuned for updates about our fine art screen printing studio."
-        />
-        <link rel="icon" href="/favicon.ico" type="image/png" />
-      </Head>
-      <div className="min-h-screen flex flex-col items-center justify-center px-6">
-        <h1 className="text-4xl font-bold  mb-4">Pre-Press</h1>
-        <p className="text-lg mb-6 text-center">
-          We’re working hard to launch our website. Stay tuned for updates about
-          our fine art screen printing studio.
-        </p>
-        <div className="flex space-x-4">
-          <a
-            href="mailto:screen.printing@simulasi.studio"
-            className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700"
-          >
-            Contact Us
-          </a>
-          <button
-            className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300"
-            onClick={() => alert("Thank you for your patience!")}
-          >
-            Notify Me
-          </button>{" "}
-        </div>
-      </div>
-    </>
+    <Box display="flex">
+      <DrawerMenu />
+      <MainContent />
+    </Box>
   );
 };
 
-export default UnderConstruction;
+export const getStaticProps: GetStaticProps = async () => {
+  const fetchData = async () => {
+    // Simulate fetching data from an API or database
+    const should404 = false; // Change to `true` to test the 404
+    return should404 ? null : "This is some homepage data!";
+  };
+
+  const data = await fetchData();
+
+  if (!data) {
+    return { props: { notFound: true } }; // Indicate that the page should render 404
+  }
+
+  return { props: { data, notFound: false } };
+};
+
+export default Home;

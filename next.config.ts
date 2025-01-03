@@ -6,8 +6,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
+  experimental: {
+    externalDir: true,
+    optimizePackageImports: ["@chakra-ui/react"],
   },
 };
 
