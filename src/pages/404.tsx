@@ -6,18 +6,10 @@ const Custom404: FC = () => {
   return (
     <Box
       position="relative" // Shift content when sidebar is open
-      p={10}
+      p={16}
       w="full"
       minH="100vh"
-      bg="dark.bg"
       transition="margin-left 0.3s ease"
-      color="dark.color"
-      sx={{
-        backgroundImage: "radial-gradient(circle, black 20%, transparent 20%)",
-        backgroundSize: "20px 20px",
-        backgroundPosition: "0 0",
-        backgroundRepeat: "repeat",
-      }}
     >
       <Heading
         as="h1"

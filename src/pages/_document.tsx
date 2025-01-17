@@ -1,4 +1,6 @@
+import { ColorModeScript } from "@chakra-ui/react";
 import { Html, Head, Main, NextScript } from "next/document";
+import theme from "../styles/theme";
 
 export default function Document() {
   return (
@@ -22,7 +24,10 @@ export default function Document() {
           src={`https://www.googletagmanager.com/gtag/js?id=AW-11462618511`}
         ></script>
       </Head>
-      <body className="antialiased">
+      <body
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+      >
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Main />
         <NextScript />
       </body>

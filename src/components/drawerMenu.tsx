@@ -18,26 +18,24 @@ const DrawerMenu = () => {
   const onClose = () => setIsOpen(false);
 
   return (
-    <Box>
+    <Box p={2}>
       {/* Button to trigger the Drawer */}
       <Button
         onClick={onOpen}
-        colorScheme="dark"
-        color="dark.color"
         position="fixed"
         zIndex={100}
+        variant="solid"
         py={6}
       >
         About
       </Button>
-
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay
           sx={{
             backdropFilter: "blur(12px)", // Apply blur to the overlay
           }}
         />
-        <DrawerContent bg="dark.bg" color="dark.color">
+        <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Simulasi Studio</DrawerHeader>
 
@@ -52,7 +50,12 @@ const DrawerMenu = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" onClick={onClose} fontSize="sm">
+            <Button
+              variant="outline"
+              colorScheme="dark"
+              onClick={onClose}
+              fontSize="sm"
+            >
               Back
             </Button>
           </DrawerFooter>

@@ -1,0 +1,7 @@
+/* globals.css or similar */
+.page-transition {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
