@@ -23,12 +23,15 @@ import {
 import { FaCalculator } from "react-icons/fa";
 
 // Define constants for paper sizes and their prices
-const PAPER_SIZES = ["A4", "A3", "A2", "A1"];
+const PAPER_SIZES = ["B5", "A4", "B4", "A3", "B3", "A2", "Poster"];
 const PAPER_PRICES: Record<string, number> = {
+  B5: 2500,
   A4: 3000,
+  B4: 5000,
   A3: 6000,
+  B3: 10000,
   A2: 12000,
-  A1: 15000,
+  Poster: 15000,
 };
 
 const ScreenPrintingCalculator = () => {
