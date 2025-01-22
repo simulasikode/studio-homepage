@@ -21,16 +21,16 @@ const theme = extendTheme({
         overscrollBehavior: "none",
         bg:
           {
-            light: "#fffcf5",
-            dark: "#2d2d2d",
-            red: "#fffcf5", // Set color for the 'red' mode
-            blue: "#fffcf5",
-            green: "#fffcf5",
-          }[props.colorMode] || "#1d1d1d", // Default color fallbackprops.colorMode
+            light: "#fefdfa",
+            dark: "#232323",
+            red: "#fefdfa", // Set color for the 'red' mode
+            blue: "#fefdfa",
+            green: "#fefdfa",
+          }[props.colorMode] || "#fefdfa", // Default color fallbackprops.colorMode
         color:
           {
             light: "#1d1d1d",
-            dark: "#fffcf5",
+            dark: "#fefdfa",
             red: "#cc4339", // Set color for the 'red' mode
             blue: "#0023FF",
             green: "#5BCA41",
@@ -38,6 +38,7 @@ const theme = extendTheme({
       },
     }),
   },
+
   fontSizes: {
     "5xl": "4rem",
     "6xl": "8rem",

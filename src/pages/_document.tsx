@@ -24,9 +24,7 @@ export default function Document() {
           src={`https://www.googletagmanager.com/gtag/js?id=AW-11462618511`}
         ></script>
       </Head>
-      <body
-        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
-      >
+      <body style={{ minHeight: "100vh" }}>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Main />
         <NextScript />

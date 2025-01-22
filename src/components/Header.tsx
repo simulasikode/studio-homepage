@@ -1,130 +1,185 @@
 import React from "react";
-import { Box, Flex, HStack, Link, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  HStack,
+  Link,
+  IconButton,
+  useBreakpointValue,
+  useDisclosure,
+  VStack,
+  useColorMode,
+} from "@chakra-ui/react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { motion } from "framer-motion";
 import ColorModeSwitcher from "./ColorSwitcher";
 
 const Header: React.FC = () => {
-  // Define whether the screen is small or large to change layout accordingly
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = useBreakpointValue({ base: true, md: false }) ?? true;
+  const { isOpen, onToggle, onClose } = useDisclosure();
+
+  const MotionBox = motion(Box);
+
+  const { colorMode } = useColorMode();
+
+  const headerBg = {
+    light: "#fefdfa",
+    dark: "#212121",
+    red: "#fefdfa",
+    green: "#fefdfa",
+    blue: "#fefdfa", // Example of contrasting blue
+  };
+
+  const headerColor = {
+    light: "#212121",
+    dark: "#fefdfa",
+    red: "#cc4339", // Set color for the 'red' mode
+    blue: "#0023FF",
+    green: "#5BCA41",
+  };
+
+  const Bg = headerBg[colorMode] || headerBg.light;
+  const Color = headerColor[colorMode] || headerColor.light;
+
+  const linkHoverStyle = {
+    textDecoration: "none",
+    transform: "scale(1.1)",
+    transformOrigin: "center",
+    transition: "transform 0.2s ease-in-out",
+  };
+
+  const generalLinks = [
+    { label: "Services", href: "/services" },
+    { label: "Pintone", href: "/pintone" },
+  ];
+
+  const categoryLinks = [
+    { label: "Separation", href: "/#" },
+    { label: "Bitmap", href: "/#" },
+  ];
 
   return (
     <Box>
+      {/* Header */}
       <Box
         as="header"
-        w="100%"
-        p={2}
-        top={0}
-        zIndex={100}
         position="fixed"
-        color="white"
-        mixBlendMode="difference"
+        top="0"
+        w="100%"
+        bg={Bg}
+        color={Color}
+        borderBottom="0.01rem solid"
+        zIndex={9999}
+        px={4}
+        py={3}
       >
         <Flex
-          justify="space-around"
+          justify="space-between"
           align="center"
-          direction={isMobile ? "row" : "row"}
+          maxW="container.xl"
+          mx="auto"
         >
-          {/* Logo */}
-          <Flex justify="flex-start">
-            <Link
-              href="/"
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.1)", // Scaling effect
-                transformOrigin: "center", // Keep scaling centered
-                transition: "transform 0.2s ease-in-out", // Smooth transition
-              }}
-              display={isMobile ? "none" : "flex"}
-            >
-              Simulasi Studio
-            </Link>
-          </Flex>
-          <Flex gap={6}>
-            <Link
-              href="/services"
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.1)", // Scaling effect
-                transformOrigin: "center", // Keep scaling centered
-                transition: "transform 0.2s ease-in-out", // Smooth transition
-              }}
-              display={isMobile ? "none" : "flex"}
-            >
-              Services
-            </Link>
-
-            <Link
-              href="https://forms.fillout.com/t/pFE4XxyiXGus"
-              isExternal
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.1)", // Scaling effect
-                transformOrigin: "center", // Keep scaling centered
-                transition: "transform 0.2s ease-in-out", // Smooth transition
-              }}
-              display={isMobile ? "none" : "flex"}
-            >
-              Request
-            </Link>
-          </Flex>
-          <HStack
-            spacing={6}
-            align="center"
-            display={isMobile ? "none" : "flex"}
+          <Link
+            href="/"
+            _hover={linkHoverStyle}
+            display={isMobile ? "none" : "block"}
+            aria-label="Navigate to Simulasi Studio Home"
           >
-            <Link
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.1)", // Scaling effect
-                transformOrigin: "center", // Keep scaling centered
-                transition: "transform 0.2s ease-in-out", // Smooth transition
-              }}
-            >
-              Fundamental
-            </Link>
-            <Link
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.1)", // Scaling effect
-                transformOrigin: "center", // Keep scaling centered
-                transition: "transform 0.2s ease-in-out", // Smooth transition
-              }}
-            >
-              Separation
-            </Link>
-            <Link
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.1)", // Scaling effect
-                transformOrigin: "center", // Keep scaling centered
-                transition: "transform 0.2s ease-in-out", // Smooth transition
-              }}
-            >
-              Color
-            </Link>
-            <Link
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.1)", // Scaling effect
-                transformOrigin: "center", // Keep scaling centered
-                transition: "transform 0.2s ease-in-out", // Smooth transition
-              }}
-            >
-              Halftone
-            </Link>
-            <Link
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.1)", // Scaling effect
-                transformOrigin: "center", // Keep scaling centered
-                transition: "transform 0.2s ease-in-out", // Smooth transition
-              }}
-            >
-              Diffusion dither
-            </Link>
-          </HStack>
+            Simulasi Studio
+          </Link>
+
+          {/* Mobile Menu Toggle */}
+          {isMobile && (
+            <IconButton
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              icon={
+                isOpen ? (
+                  <FaTimes aria-hidden="true" />
+                ) : (
+                  <FaBars aria-hidden="true" />
+                )
+              }
+              onClick={onToggle}
+              variant="unstyled"
+            />
+          )}
+
+          {/* Desktop Links */}
+          {!isMobile && (
+            <HStack spacing={6}>
+              {[...generalLinks, ...categoryLinks].map(({ label, href }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  _hover={linkHoverStyle}
+                  aria-label={`Navigate to ${label}`}
+                >
+                  {label}
+                </Link>
+              ))}
+            </HStack>
+          )}
+
+          {/* Color Mode Switcher */}
+          <ColorModeSwitcher />
         </Flex>
       </Box>
-      <ColorModeSwitcher />
+
+      {/* Mobile Menu */}
+      {isOpen && isMobile && (
+        <MotionBox
+          position="fixed"
+          top="80px"
+          left="4"
+          right="4"
+          bg={Bg}
+          color={Color}
+          border="0.01rem solid"
+          borderRadius="md"
+          zIndex={1000}
+          width={250}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+        >
+          <Flex direction="column" gap={6} py={6}>
+            {/* Section 1: General Links */}
+            <Box pb={4} borderBottom="0.01rem solid" px={4}>
+              <VStack align="flex-start" spacing={3}>
+                {generalLinks.map(({ label, href }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    _hover={linkHoverStyle}
+                    aria-label={`Navigate to ${label}`}
+                    onClick={onClose}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </VStack>
+            </Box>
+
+            {/* Section 2: Category Links */}
+            <Box px={4}>
+              <VStack align="flex-start" spacing={3}>
+                {categoryLinks.map(({ label, href }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    _hover={linkHoverStyle}
+                    aria-label={`Navigate to ${label}`}
+                    onClick={onClose}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </VStack>
+            </Box>
+          </Flex>
+        </MotionBox>
+      )}
     </Box>
   );
 };

@@ -23,19 +23,19 @@ const InfoFooter = () => {
   const { colorMode } = useColorMode();
 
   const footerBgColors = {
-    light: "#1d1d1d",
-    dark: "#1d1d1d",
+    light: "#212121",
+    dark: "#212121",
     red: "#cc4339",
     green: "#5BCA41",
     blue: "#0023FF", // Example of contrasting blue
   };
 
   const footerTextColors = {
-    light: "white",
-    dark: "white",
-    red: "white",
-    green: "white",
-    blue: "white",
+    light: "#fefdfa",
+    dark: "#fefdfa",
+    red: "#fefdfa",
+    green: "#fefdfa",
+    blue: "#fefdfa",
   };
 
   const footerBg = footerBgColors[colorMode] || footerBgColors.light;

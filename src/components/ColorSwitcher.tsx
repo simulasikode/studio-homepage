@@ -1,4 +1,4 @@
-import { useColorMode, Button, Icon, Flex } from "@chakra-ui/react";
+import { useColorMode, Button, Icon, Box } from "@chakra-ui/react";
 import { MdOutlineGradient } from "react-icons/md";
 
 const ColorModeSwitcher = () => {
@@ -27,14 +27,7 @@ const ColorModeSwitcher = () => {
   };
 
   return (
-    <Flex
-      position="fixed"
-      top="0"
-      right="0"
-      zIndex="100"
-      align="center"
-      justify="center"
-    >
+    <Box>
       <Button onClick={switchToNextColorMode} variant="plain">
         <Icon
           as={modeIcons[colorMode]}
@@ -42,7 +35,7 @@ const ColorModeSwitcher = () => {
           boxSize={6}
         />
       </Button>
-    </Flex>
+    </Box>
   );
 };
 

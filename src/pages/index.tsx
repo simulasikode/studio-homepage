@@ -8,10 +8,9 @@ const ParalaxSection = motion(Box);
 
 const MainContent = () => (
   <Box
-    position="relative" // Shift content when sidebar is open
-    px={{ base: "4", md: "28" }}
-    py={12}
-    w="full"
+    px={{ base: "4", md: "16" }}
+    py={16}
+    w="container.xl"
     minH="100vh"
     transition="margin-left 0.3s ease"
   >

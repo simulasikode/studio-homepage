@@ -1,5 +1,10 @@
 // pages/_app.tsx
-import { Box, ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import {
+  Box,
+  ChakraProvider,
+  ColorModeScript,
+  CSSReset,
+} from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Theme from "../styles/theme";
 import Head from "next/head";
@@ -60,14 +65,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Box
           className="page-transition"
           sx={{
-            backgroundImage: "radial-gradient(circle, gray 5%, transparent 5%)",
-            backgroundSize: "20px 20px",
+            backgroundImage: "radial-gradient(circle, gray 2%, transparent 2%)",
+            backgroundSize: "18px 18px",
             backgroundPosition: "0 0",
             backgroundRepeat: "repeat",
           }}
         >
           <GoogleTagManager gtmId="GTM-PBBJ4ZFZ" />
           <Header />
+          <CSSReset />
           <Component {...pageProps} />
           <ParallaxText text="Everything is Simulation" speed={1} />
           <Footer />

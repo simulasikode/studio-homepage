@@ -1,27 +1,22 @@
-import { Box, Heading, Link } from "@chakra-ui/react";
+import { Box, Heading, Link, Text } from "@chakra-ui/react";
 
 import { FC } from "react";
 
 const Custom404: FC = () => {
   return (
-    <Box
-      position="relative" // Shift content when sidebar is open
-      p={16}
-      w="full"
-      minH="100vh"
-      transition="margin-left 0.3s ease"
-    >
+    <Box p={16}>
       <Heading
         as="h1"
         fontSize={{ base: "5xl", md: "7xl" }}
         fontWeight="extrabold"
         mb={4}
       >
-        404 page
+        404 Page Not Found!
       </Heading>
-      <Link href="/">
-        return to homepage, maybe next time we make this page.
-      </Link>
+      <Heading as="h2" size="sm">
+        <Link href="/">return to homepage.</Link>
+      </Heading>
+      <Text mt={4}>Thank you</Text>
     </Box>
   );
 };

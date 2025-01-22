@@ -77,8 +77,8 @@ const SimulationProcess = () => {
         <Box flex="1">
           <Heading
             as="h2"
-            size={{ base: "xl", md: "3xl" }}
-            mb={8}
+            size={{ base: "xl", md: "2xl" }}
+            mb={6}
             className="gsap-text"
           >
             Color Separation
